@@ -203,7 +203,7 @@
 @extends('layouts.master')
 
 @section('content')
-<h1>hello</h1>
+
     <div class="container mt-4 flex flex-wrap justify-center">
         <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
             <thead class="align-bottom">
