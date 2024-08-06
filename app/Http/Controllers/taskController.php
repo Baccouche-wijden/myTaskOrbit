@@ -78,29 +78,41 @@ class TaskController extends Controller
 
 
 
-public function rateTask(Request $request, $id)
-{
-    $task = Task::findOrFail($id);
-    $this->authorize('update', $task);
+    public function rateTask(Request $request, $id)
+    {
+        $task = Task::findOrFail($id);
+        $this->authorize('update', $task);
 
-    $task->rating = $request->input('rating');
-    $task->save();
-
-    return response()->json(['success' => true]);
-}
-public function updateRating(Request $request, $id)
-{
-    $task = Task::find($id);
-
-    if (auth()->user()->id === $task->user_id || auth()->user()->role === 'admin') {
-        $task->rating = $request->rating;
+        $task->rating = $request->input('rating');
         $task->save();
 
-        return response()->json(['success' => true, 'message' => 'Rating updated successfully.']);
+        return response()->json(['success' => true]);
+    }
+    public function updateRating(Request $request, $id)
+    {
+        $task = Task::find($id);
+
+        if (auth()->user()->id === $task->user_id || auth()->user()->role === 'admin') {
+            $task->rating = $request->rating;
+            $task->save();
+
+            return response()->json(['success' => true, 'message' => 'Rating updated successfully.']);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Unauthorized.'], 403);
     }
 
-    return response()->json(['success' => false, 'message' => 'Unauthorized.'], 403);
-}
+
+    public function kanban()
+    {
+        $tasks = Task::all();
+
+        $toDo = $tasks->where('rating', [0],1);
+        $doing = $tasks->whereBetween('rating', [2, 99]);
+        $done = $tasks->where('rating', 100);
+
+        return view('tasks.kanban', compact('toDo', 'doing', 'done'));
+    }
 
 
 

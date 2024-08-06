@@ -56,7 +56,7 @@
                         <i class='bx bx-folder nav_icon'></i>
                         <span class="nav_name">Projects</span>
                     </a>
-                    <a href="#" class="nav_link">
+                    <a href="{{route('tasks.kanban')}}" class="nav_link">
                         <i class='bx bx-bar-chart-alt-2 nav_icon'></i>
                         <span class="nav_name">Kanban</span>
                     </a>

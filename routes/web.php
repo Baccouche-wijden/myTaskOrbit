@@ -73,5 +73,9 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/search-users', [ProfileController::class, 'search'])->name('search.users');
 
+//kanban
+Route::get('/kanban', [TaskController::class, 'kanban'])->name('tasks.kanban');
+
+
 require __DIR__.'/auth.php';
 

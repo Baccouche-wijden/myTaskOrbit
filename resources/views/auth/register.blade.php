@@ -25,8 +25,14 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <!-- Position -->
-
+        <!-- Gender -->
+        <div class="mt-4">
+            <x-input-label for="gender" :value="__('Gender')" />
+            <x-select name="gender" id="gender">
+                    <option value="Female">Female</option>
+                    <option value="male">Male</option>
+            </x-select>
+        </div>
 
         <!-- Password -->
         <div class="mt-4">
