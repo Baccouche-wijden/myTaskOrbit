@@ -1,13 +1,10 @@
 <head>
     <link rel="icon" href="{{ asset('images/icon.png') }}" type="image/x-icon">
-</head><x-guest-layout>
-    <style>
-        select {
-            border: 1px solid rgb(188, 188, 188); /* Border color */
-            border-radius: 5px; /* Border radius */
-            padding: 7px; /* Optional padding for better look */
-        }
-    </style>
+</head>
+
+
+    <x-guest-layout>
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -28,9 +25,9 @@
         <!-- Gender -->
         <div class="mt-4">
             <x-input-label for="gender" :value="__('Gender')" />
-            <x-select name="gender" id="gender">
+            <x-select name="gender" id="gender" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-lg shadow-sm  w-full">
                     <option value="Female">Female</option>
-                    <option value="male">Male</option>
+                    <option value="Male">Male</option>
             </x-select>
         </div>
 

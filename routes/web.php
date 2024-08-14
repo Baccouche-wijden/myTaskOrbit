@@ -15,7 +15,6 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 Route::get('/', function () {
     return view('herosection');
 });
-
 // Dashboard Route
 Route::get('/dashboard', function () {
     return view('myDashboard');
