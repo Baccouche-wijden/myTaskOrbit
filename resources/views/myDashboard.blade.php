@@ -54,7 +54,7 @@
                 config
             );
 
-            // Chart 2 data and configuration
+            // Chart 2 data and config
             const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
             const data2 = {
                 labels: labels,
