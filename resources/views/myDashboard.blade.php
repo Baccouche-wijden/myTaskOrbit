@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="{{ asset('images/icon.png') }}" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
     <title>TaskOrbit</title>
 </head>
 
@@ -22,6 +23,9 @@
                 <div class="chart-container w-1/2 h-128">
                     <canvas id="myChart2"></canvas>
                 </div>
+            </div>
+            <div id="calendar" class="h-128 w-1/2">
+
             </div>
         </div>
 
@@ -100,6 +104,15 @@
                 document.getElementById('myChart2'),
                 config2
             );
+
+            //add calendar
+            document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth'
+            });
+            calendar.render();
+            });
         </script>
 
     @endsection
