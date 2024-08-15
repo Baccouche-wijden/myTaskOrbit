@@ -36,9 +36,9 @@
                     label: 'My First Dataset',
                     data: [300, 50, 100],
                     backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 205, 86)'
+                        '#FF5B22',
+                        '#050ebf',
+                        '#F9E400',
                     ],
                     hoverOffset: 4
                 }]
@@ -59,6 +59,7 @@
             );
 
             // Chart 2 data and config
+
             const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
             const data2 = {
                 labels: labels,
@@ -105,7 +106,8 @@
                 config2
             );
 
-            //add calendar
+            //add calendar (from FullCalendar)
+
             document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
