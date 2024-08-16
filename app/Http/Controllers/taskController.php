@@ -113,6 +113,24 @@ class TaskController extends Controller
 
         return view('tasks.kanban', compact('toDo', 'doing', 'done'));
     }
+    //meets
+    public function adminSpace () {
+        return view('tasks.adminSpace');
+
+    }
+
+    public function addMeet(TaskRequest $request)
+    {
+        // Create a new task with the authenticated user's ID
+        Task::create([
+            'description' => $request->description,
+            'user_id' => auth()->id(),
+        ]);
+
+        return redirect()->route('task');
+    }
+
+
 
 
 

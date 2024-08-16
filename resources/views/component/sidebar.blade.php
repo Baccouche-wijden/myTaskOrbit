@@ -60,6 +60,12 @@
                         <i class='bx bx-bar-chart-alt-2 nav_icon'></i>
                         <span class="nav_name">Kanban</span>
                     </a>
+                    @if(Auth::check() && Auth::user()->role === 'admin')
+                    <a href="{{route('tasks.adminSpace')}}" class="nav_link">
+                        <i class="nav_icon"><img src="{{ asset('images/meetsicons.png') }}" alt="adminSpaceIcon"></i>
+                        <span class="nav_name">Admin Space</span>
+                    </a>
+                    @endif
                 </div>
             </div>
             <form method="POST" action="{{ route('logout') }}" class="nav_link">

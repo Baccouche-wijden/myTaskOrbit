@@ -36,9 +36,9 @@
                     label: 'My First Dataset',
                     data: [300, 50, 100],
                     backgroundColor: [
-                        '#FF5B22',
-                        '#050ebf',
-                        '#F9E400',
+                        '#F72798',
+                        '#3FA2F6',
+                        '#88D66C',
                     ],
                     hoverOffset: 4
                 }]
@@ -109,13 +109,34 @@
             //add calendar (from FullCalendar)
 
             document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth'
-            });
-            calendar.render();
-            });
-        </script>
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: [
+                {
+                    title: 'Project Deadline',
+                    start: '2024-08-20',
+                    end: '2024-08-22', // If it's a range of dates
+                    backgroundColor: '#F72798', // Custom color
+                    borderColor: '#F72798',
+                },
+                {
+                    title: 'Team Meeting',
+                    start: '2024-08-25T10:30:00', // Date with time
+                    backgroundColor: '#3FA2F6',
+                    borderColor: '#3FA2F6',
+                },
+                {
+                    title: 'Client Presentation',
+                    start: '2024-08-28',
+                    backgroundColor: '#88D66C',
+                    borderColor: '#88D66C',
+                }
+            ]
+        });
+        calendar.render();
+    });
+</script>
 
     @endsection
 </body>
