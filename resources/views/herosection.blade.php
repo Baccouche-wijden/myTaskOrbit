@@ -95,6 +95,9 @@
         padding: 0;
         box-sizing: border-box;
         }
+        body{
+            background-color: #ecf0ec;
+        }
         html {
         font-family: Rubik;
         color: #fff;
@@ -115,7 +118,7 @@
             font-family: "Myriad Pro", Arial, sans-serif;
         }
         .orbit, h3{
-            color:#050ebf;
+            color:#071952;
         }
         h3{
             margin-top: -1.2em;
@@ -157,6 +160,7 @@
         font-size: 20px;
         line-height: 1.6;
         margin-bottom: 48px;
+        color:#3C3D37;
         }
 
         .btn:link,
