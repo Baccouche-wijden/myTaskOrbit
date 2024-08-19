@@ -106,32 +106,22 @@
                 config2
             );
 
+
             //add calendar (from FullCalendar)
 
             document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             events: [
+                @foreach($meets as $meet)
                 {
-                    title: 'Project Deadline',
-                    start: '2024-08-20',
-                    end: '2024-08-22', // If it's a range of dates
-                    backgroundColor: '#F72798', // Custom color
+                    title: '{{ $meet->title }}',
+                    start: '{{ $meet->date }}T{{ $meet->time }}',
+                    backgroundColor: '#F72798',
                     borderColor: '#F72798',
                 },
-                {
-                    title: 'Team Meeting',
-                    start: '2024-08-25T10:30:00', // Date with time
-                    backgroundColor: '#3FA2F6',
-                    borderColor: '#3FA2F6',
-                },
-                {
-                    title: 'Client Presentation',
-                    start: '2024-08-28',
-                    backgroundColor: '#88D66C',
-                    borderColor: '#88D66C',
-                }
+                @endforeach
             ]
         });
         calendar.render();

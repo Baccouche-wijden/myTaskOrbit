@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\TaskRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use App\Models\Meet;
 
 class TaskController extends Controller
 {
@@ -114,21 +115,37 @@ class TaskController extends Controller
         return view('tasks.kanban', compact('toDo', 'doing', 'done'));
     }
     //meets
-    public function adminSpace () {
-        return view('tasks.adminSpace');
 
-    }
 
-    public function addMeet(TaskRequest $request)
+        public function adminSpace()
+{
+        $meets = Meet::all();
+        dd($meets) ;// Assuming 'Meet' is your model for the 'meets' table
+        return view('tasks.adminSpace', compact('meets'));
+}
+
+
+
+
+
+    public function addMeet(Request $request)
     {
-        // Create a new task with the authenticated user's ID
-        Task::create([
-            'description' => $request->description,
-            'user_id' => auth()->id(),
+        // Validate the request data
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'date' => 'required|date',
+            'time' => 'required|date_format:H:i',
         ]);
 
-        return redirect()->route('task');
+        // Store the data in the database
+        Meet::create($validatedData);
+
+        // Redirect back with success message
+        return redirect()->route('tasks.adminSpace')->with('success', 'Meet added successfully');
     }
+
+
+
 
 
 

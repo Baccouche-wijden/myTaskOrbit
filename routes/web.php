@@ -79,8 +79,7 @@ Route::get('/kanban', [TaskController::class, 'kanban'])->name('tasks.kanban');
 Route::get('/adminSpace', [TaskController::class, 'adminSpace'])->name('tasks.adminSpace');
 Route::post('/adminSpace', [TaskController::class, 'addMeet'])->name('adminSpace.meet');
 
-Route::post('/task', [TaskController::class, 'add'])->name('task.add');
-Route::get('/addtask', [TaskController::class, 'index'])->name('task');
+
 
 
 require __DIR__.'/auth.php';
