@@ -7,6 +7,8 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Models\Meet;
 
+use function PHPSTORM_META\map;
+
 class TaskController extends Controller
 {
     public function index()
@@ -120,35 +122,21 @@ class TaskController extends Controller
         public function adminSpace()
 {
         $meets = Meet::all();
-        dd($meets) ;// Assuming 'Meet' is your model for the 'meets' table
-        return view('tasks.adminSpace', compact('meets'));
+        // Assuming 'Meet' is your model for the 'meets' table
+        return view('tasks.adminSpace', compact('$meets'));
 }
-
-
-
-
 
     public function addMeet(Request $request)
     {
-        // Validate the request data
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'date' => 'required|date',
-            'time' => 'required|date_format:H:i',
-        ]);
+            Meet::create([
+                'title'=> $request->title,
+                'date'=>$request->date,
+                'time'=>$request->time,
 
-        // Store the data in the database
-        Meet::create($validatedData);
+            ]);
 
-        // Redirect back with success message
-        return redirect()->route('tasks.adminSpace')->with('success', 'Meet added successfully');
+        return redirect()->route('tasks.adminSpace');
     }
-
-
-
-
-
-
 
 
 }

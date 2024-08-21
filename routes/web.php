@@ -4,13 +4,15 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\ProjectController;
+
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 use App\Models\Project;
 use App\Models\User;
 use App\Models\Task;
+use App\Models\Meet;
 
-use App\Http\Controllers\ProjectController;
-use Symfony\Component\HttpKernel\Profiler\Profile;
 
 Route::get('/', function () {
     return view('herosection');
@@ -66,9 +68,8 @@ Route::middleware('auth')->group(function () {
     Route::get('projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
     Route::put('projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
     Route::delete('projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+
 });
-
-
 
 Route::get('/search-users', [ProfileController::class, 'search'])->name('search.users');
 
@@ -78,8 +79,6 @@ Route::get('/kanban', [TaskController::class, 'kanban'])->name('tasks.kanban');
 //adminSpace
 Route::get('/adminSpace', [TaskController::class, 'adminSpace'])->name('tasks.adminSpace');
 Route::post('/adminSpace', [TaskController::class, 'addMeet'])->name('adminSpace.meet');
-
-
 
 
 require __DIR__.'/auth.php';
