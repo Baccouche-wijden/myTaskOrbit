@@ -146,24 +146,24 @@
         <div class="w-1/2 ">
         <div class="container ">
                 <div class="left w-1/2 ">
-                <form class="form " method="POST" action="{{ route('adminSpace.meet') }}">
-                    @csrf
+                    <form class="form" method="POST" action="{{ route('adminSpace.meet') }}">
+                        @csrf
                         <div class="input-block">
                             <input class="input" type="text" id="title" name="title" required="">
                             <label for="title">Title</label>
                         </div>
-                        <div class="input-block"><!--date-->
+                        <div class="input-block">
                             <input class="input" type="date" id="date" name="date" required="">
-
-                        </div>
-                        <div class="input-block"><!--time-->
-                            <input class="input" type="time" id="time" name="time" required="">
-
                         </div>
                         <div class="input-block">
-                        <button>Submit</button>
-                    </div>
+                            <input class="input" type="time" id="time" name="time" required="">
+                        </div>
+                        <div class="input-block">
+                            <button type="submit">Submit</button>
+                        </div>
                     </form>
+
+
                 </div>
                 <div class="right">
                     <div class="img"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 731.67004 550.61784" xmlns:xlink="http://www.w3.org/1999/xlink">

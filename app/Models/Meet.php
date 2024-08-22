@@ -10,8 +10,6 @@ class Meet extends Model
     use HasFactory;
 
     protected $table = 'meets';
-    protected $fillable = ['title', 'date','time'];
-
-
+    protected $fillable = ['title', 'date', 'time'];
 }
 

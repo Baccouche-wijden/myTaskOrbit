@@ -17,10 +17,13 @@ use App\Models\Meet;
 Route::get('/', function () {
     return view('herosection');
 });
+Route::get('/dashboard', [TaskController::class, 'dashboard'])->name('dashboard');
+
 // Dashboard Route
-Route::get('/dashboard', function () {
-    return view('myDashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+
+//     return view('myDashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Authenticated Routes
 Route::middleware('auth')->group(function () {
@@ -78,7 +81,7 @@ Route::get('/kanban', [TaskController::class, 'kanban'])->name('tasks.kanban');
 
 //adminSpace
 Route::get('/adminSpace', [TaskController::class, 'adminSpace'])->name('tasks.adminSpace');
-Route::post('/adminSpace', [TaskController::class, 'addMeet'])->name('adminSpace.meet');
+Route::post('/adminSpaceAdd', [TaskController::class, 'addMeet'])->name('adminSpace.meet');
 
 
 require __DIR__.'/auth.php';

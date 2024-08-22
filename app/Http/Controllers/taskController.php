@@ -79,8 +79,6 @@ class TaskController extends Controller
 
     // TaskController.php
 
-
-
     public function rateTask(Request $request, $id)
     {
         $task = Task::findOrFail($id);
@@ -117,26 +115,32 @@ class TaskController extends Controller
         return view('tasks.kanban', compact('toDo', 'doing', 'done'));
     }
     //meets
-
-
-        public function adminSpace()
-{
+    public function adminSpace()
+    {
         $meets = Meet::all();
-        // Assuming 'Meet' is your model for the 'meets' table
-        return view('tasks.adminSpace', compact('$meets'));
-}
+        return view('tasks.dashboard', compact('meets')); // Make sure this view name is correct
+    }
 
     public function addMeet(Request $request)
     {
-            Meet::create([
-                'title'=> $request->title,
-                'date'=>$request->date,
-                'time'=>$request->time,
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'date' => 'required|date',
+            'time' => 'required|date_format:H:i',
+        ]);
 
-            ]);
-
+        Meet::create($validatedData);
         return redirect()->route('tasks.adminSpace');
     }
+    public function dashboard()
+{
+    try {
+        $meets = Meet::all();
+        return view('myDashboard', compact('meets'));
+    } catch (\Exception $e) {
+        return $e->getMessage(); // To see if there's a DB connection issue
+    }
+}
 
 
 }
