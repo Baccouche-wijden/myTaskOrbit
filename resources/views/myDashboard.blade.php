@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="{{ asset('images/icon.png') }}" type="image/x-icon">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/main.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/main.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
 
-    <!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Bootstrap JS (for modal functionality) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS (for modal functionality) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
     <title>TaskOrbit</title>
@@ -35,12 +37,10 @@
                     <canvas id="myChart2"></canvas>
                 </div>
             </div>
-            <div id="calendar" class="h-128 w-1/2">
-
-            </div>
+            <div id="calendar" class="h-128 w-1/2"></div>
         </div>
 
-        <!--modal to display event's details : -->
+        <!-- Modal to display event's details -->
         <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -58,6 +58,7 @@
         </div>
 
         <script>
+            // Chart 1 data and config
             const data = {
                 labels: ['1st project', '2nd project', '3rd project'],
                 datasets: [{
@@ -76,7 +77,7 @@
                 type: 'pie',
                 data: data,
                 options: {
-                    maintainAspectRatio: false, // Disable the aspect ratio ()
+                    maintainAspectRatio: false,
                 }
             };
 
@@ -87,7 +88,6 @@
             );
 
             // Chart 2 data and config
-
             const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
             const data2 = {
                 labels: labels,
@@ -132,85 +132,40 @@
             const myChart2 = new Chart(
                 document.getElementById('myChart2'),
                 config2
-
             );
-            //add calendar (from FullCalendar)
 
+            // Add calendar (from FullCalendar)
             document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                events: [
-                    @foreach($meets as $meet)
-                    {
-                        title: '{{ $meet->title }}',
-                        start: '{{ $meet->date }}T{{ $meet->time }}',
-                        backgroundColor: '#F72798',
-                        borderColor: '#F72798',
-                    },
-                    @endforeach
-                ],
-                eventClick: function(info) {
-                    // Set the modal title and body content
-                    document.getElementById('modalEventTitle').textContent = info.event.title;
-                    document.getElementById('modalEventDate').textContent = info.event.start.toISOString().split('T')[0];
-                    document.getElementById('modalEventTime').textContent = info.event.start.toLocaleTimeString();
+                var calendarEl = document.getElementById('calendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    events: [
+                        @foreach($meets as $meet)
+                        {
+                            title: '{{ $meet->title }}',
+                            start: '{{ $meet->date }}T{{ $meet->time }}',
+                            backgroundColor: '#F72798',
+                            borderColor: '#F72798',
+                        },
+                        @endforeach
+                    ],
+                    eventClick: function(info) {
+                        // Set the modal title and body content
+                        document.getElementById('modalEventTitle').textContent = info.event.title;
+                        document.getElementById('modalEventDate').textContent = info.event.start.toISOString().split('T')[0];
+                        document.getElementById('modalEventTime').textContent = info.event.start.toLocaleTimeString();
 
-                    // Show the modal
-                    var myModal = new bootstrap.Modal(document.getElementById('eventModal'), {
-                        keyboard: false
-                    });
-                    myModal.show();
-                }
+                        // Show the modal
+                        var myModal = new bootstrap.Modal(document.getElementById('eventModal'), {
+                            keyboard: false
+                        });
+                        myModal.show();
+                    }
+                });
+                calendar.render();
             });
-            calendar.render();
-        });
-/*an i get the pop up on the calendar? like the event details appears on a box on the calendar not vertically at left :         <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="eventModalLabel">Event Details</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p><strong>Title:</strong> <span id="modalEventTitle"></span></p>
-                        <p><strong>Date:</strong> <span id="modalEventDate"></span></p>
-                        <p><strong>Time:</strong> <span id="modalEventTime"></span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-          document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                events: [
-                    @foreach($meets as $meet)
-                    {
-                        title: '{{ $meet->title }}',
-                        start: '{{ $meet->date }}T{{ $meet->time }}',
-                        backgroundColor: '#F72798',
-                        borderColor: '#F72798',
-                    },
-                    @endforeach
-                ],
-                eventClick: function(info) {
-                    // Set the modal title and body content
-                    document.getElementById('modalEventTitle').textContent = info.event.title;
-                    document.getElementById('modalEventDate').textContent = info.event.start.toISOString().split('T')[0];
-                    document.getElementById('modalEventTime').textContent = info.event.start.toLocaleTimeString();
-
-                    // Show the modal
-                    var myModal = new bootstrap.Modal(document.getElementById('eventModal'), {
-                        keyboard: false
-                    });
-                    myModal.show();
-                }
-            });
-            calendar.render();
-        });*/
-
-    </script>
+        </script>
     @endsection
+
 </body>
 </html>

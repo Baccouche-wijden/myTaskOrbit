@@ -118,7 +118,7 @@ class TaskController extends Controller
     public function adminSpace()
     {
         $meets = Meet::all();
-        return view('tasks.dashboard', compact('meets')); // Make sure this view name is correct
+        return view('tasks.adminSpace', compact('meets')); // Make sure this view name is correct
     }
 
     public function addMeet(Request $request)
@@ -134,13 +134,8 @@ class TaskController extends Controller
     }
     public function dashboard()
 {
-    try {
         $meets = Meet::all();
         return view('myDashboard', compact('meets'));
-    } catch (\Exception $e) {
-        return $e->getMessage(); // To see if there's a DB connection issue
     }
 }
 
-
-}

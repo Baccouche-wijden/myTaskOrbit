@@ -59,29 +59,29 @@ class ProjectController extends Controller
             }
 
 
-public function edit(Project $project)
-{
-    return view('projects.edit', compact('project'));
-}
+        public function edit(Project $project)
+        {
+            return view('projects.edit', compact('project'));
+        }
 
-public function update(Request $request, Project $project)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'required|string',
-    ]);
+        public function update(Request $request, Project $project)
+        {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'required|string',
+            ]);
 
-    $project->update($request->only('name', 'description'));
+            $project->update($request->only('name', 'description'));
 
-    return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
-}
+            return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
+        }
 
-public function destroy(Project $project)
-{
-    $project->delete();
+        public function destroy(Project $project)
+        {
+            $project->delete();
 
-    return redirect()->route('projects.index')->with('success', 'Project deleted successfully.');
-}
+            return redirect()->route('projects.index')->with('success', 'Project deleted successfully.');
+        }
 
 
 }
