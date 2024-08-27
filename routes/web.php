@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     // Task Routes
     Route::post('/task', [TaskController::class, 'add'])->name('task.add');
     Route::get('/addtask', [TaskController::class, 'index'])->name('task');
+    Route::get('/taskAssign', [ProjectController::class, 'formTasks'])->name('task');
     Route::get('/task', [TaskController::class, 'showTask'])->name('tasks.showTask');
     Route::resource('tasks', TaskController::class)->middleware('auth');
 

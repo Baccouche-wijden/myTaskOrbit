@@ -83,5 +83,9 @@ class ProjectController extends Controller
             return redirect()->route('projects.index')->with('success', 'Project deleted successfully.');
         }
 
-
+        public function formTasks()
+        {
+                $projects = Project::all();
+                return view('tasks.task', compact('projects'));
+            }
 }

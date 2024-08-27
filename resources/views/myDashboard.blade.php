@@ -164,6 +164,8 @@
                 });
                 calendar.render();
             });
+
+            //function to display project contribution ( via nb tasks assigned to each project : DOGHUNT chart )
         </script>
     @endsection
 

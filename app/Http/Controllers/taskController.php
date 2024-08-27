@@ -6,6 +6,7 @@ use App\Http\Requests\TaskRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Models\Meet;
+use App\Models\Project;
 
 use function PHPSTORM_META\map;
 
@@ -15,19 +16,32 @@ class TaskController extends Controller
     {
         // Eager load the user with each task
         $tasks = Task::with('user')->get();
-        return view('tasks.index', compact('tasks'));
+        return view('tasks.task', compact('tasks'));
     }
 
-    public function add(TaskRequest $request)
-    {
-        // Create a new task with the authenticated user's ID
-        Task::create([
-            'description' => $request->description,
-            'user_id' => auth()->id(),
-        ]);
+        public function add(TaskRequest $request)
+        {
+            dd($request->all()); // Add this line for debugging
+            $request->validate([
+                'tasksname' => 'required|string|max:255',
+                'description' => 'required|string',
+                'project_id' => 'required|exists:projects,id',
+            ]);
 
-        return redirect()->route('task');
-    }
+            // Create a new task with the authenticated user's ID
+            Task::create([
+                'tasksname' => $request->tasksname,
+                'description' => $request->description,
+                'user_id' => auth()->id(),
+                'project_id' => $request->project_id, // Assuming 'project_id' is the correct column name in the tasks table
+            ]);
+
+            return redirect()->route('task');
+        }
+
+
+
+
 
     public function showTask()
     {
@@ -137,5 +151,6 @@ class TaskController extends Controller
         $meets = Meet::all();
         return view('myDashboard', compact('meets'));
     }
+
 }
 

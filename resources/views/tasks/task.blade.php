@@ -1,4 +1,4 @@
-:: <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -34,10 +34,20 @@
                 </div>
 
 
+                <div class="mt-4">
+
+                    <x-input-label for="project_id" :value="__('Project')" />
+                    <x-select name="project_id" id="project_id" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-lg shadow-sm w-full" required>
+                        @foreach($projects as $project)
+                            <option value="{{ $project->id }}">{{ $project->name }}</option>
+                        @endforeach
+                    </x-select>
+                </div>
+
+
+
 
                 <div class="flex items-center justify-end mt-4">
-
-
                     <button class="ms-4 inline-flex items-center px-4 py-2  border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150" style="background-color: #ff5f00">
                         {{ __('Add Task') }}
                     </button>
