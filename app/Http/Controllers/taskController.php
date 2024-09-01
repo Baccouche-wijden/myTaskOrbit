@@ -9,6 +9,7 @@ use App\Models\Meet;
 use App\Models\Project;
 
 use function PHPSTORM_META\map;
+use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
@@ -21,7 +22,6 @@ class TaskController extends Controller
 
         public function add(TaskRequest $request)
         {
-            dd($request->all()); // Add this line for debugging
             $request->validate([
                 'tasksname' => 'required|string|max:255',
                 'description' => 'required|string',
@@ -30,7 +30,6 @@ class TaskController extends Controller
 
             // Create a new task with the authenticated user's ID
             Task::create([
-                'tasksname' => $request->tasksname,
                 'description' => $request->description,
                 'user_id' => auth()->id(),
                 'project_id' => $request->project_id, // Assuming 'project_id' is the correct column name in the tasks table
@@ -151,6 +150,11 @@ class TaskController extends Controller
         $meets = Meet::all();
         return view('myDashboard', compact('meets'));
     }
+
+
+
+
+
 
 }
 

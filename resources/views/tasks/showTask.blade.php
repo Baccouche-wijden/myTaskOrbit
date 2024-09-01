@@ -238,14 +238,13 @@
                         </td>
 
                         <td class="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap">
-                            @if($task->user && $task->user->projects->isNotEmpty())
-                                @foreach($task->user->projects as $project)
-                                    <span class="font-semibold leading-tight text-xs">{{ $project->name }}</span><br>
-                                @endforeach
+                            @if($task->project_id && $task->project)
+                                <span class="font-semibold leading-tight text-xs">{{ $task->project->name }}</span><br>
                             @else
                                 <span class="font-semibold leading-tight text-xs">No Project Assigned</span>
                             @endif
                         </td>
+
 
                         <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap">
                             <div class="slidecontainer">
@@ -310,6 +309,8 @@
                         </td>
 
                     </tr>
+
+                    <!--edit form-->
                     <tr id="edit-form-{{ $task->id }}" style="display: none;">
                         <td colspan="5">
                             <form action="{{ route('tasks.update', $task->id) }}" method="POST">

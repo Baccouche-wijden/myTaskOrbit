@@ -12,7 +12,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->unsignedBigInteger('project_id'); // Assuming you want to reference a project
+            $table->unsignedBigInteger('project_id')->nullable()->change();
         });
     }
 
