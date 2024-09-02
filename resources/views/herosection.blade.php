@@ -82,195 +82,343 @@
       rel="stylesheet"
     />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
     <style>
         *{
         margin: 0;
         padding: 0;
         box-sizing: border-box;
         }
-        #bg{
-            background-color: #071952;
+        #button {
+        background-color: #1A237E;
         }
 
-        .container{
-        margin: 0 auto;
-        width: 1200px;
-
+        #button:hover {
+            background-color: #ff5f00;
         }
-        .lognav{
-            display: flex;
-        align-items:end;
-        justify-content: end;
+        html {
+        scroll-behavior: smooth;
         }
-
-        h3{
-            margin-top: -1.2em;
+        #nav{
+            position: fixed;
+            top: 0; /* Aligns it to the top of the viewport */
+            left: 0; /* Aligns it to the left of the viewport */
+            width: 100%; /* Makes sure the navbar spans the full width */
+            z-index: 1000; /* Makes sure the navbar is on top of other elements */
         }
-        header {
-
-        height: 100vh;
-        position: relative;
-        background-image:
-        background-size: cover;
-        color: #000;
+        #navbar{
+            color: white;
         }
-
-        .header-container {
-        width: 1200px;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%,-50%);
+        #navbar:hover{
+            color: #ff5f00;
         }
-
-        #container {
-        width: 50%;
-        }
-        nav {
-        font-size: 20px;
-        font-weight: 700;
-        display: flex;
-        justify-content: space-between;
-        padding-top: 32px;
-        }
-        h1 {
-        font-size: 52px;
-        margin-bottom: 32px;
-        line-height: 1.05;
-        }
-
-        p{
-        font-size: 20px;
-        line-height: 1.6;
-        margin-bottom: 48px;
-        color:#3C3D37;
-        }
-
-        h2{
-        font-size: 42px;
-        margin-bottom: 48px;
-        }
-
-        section{
-        padding: 96px 0;
-        background-color: #fff;
-
-        }
-
 
     </style>
-  </head>
-  <body>
-    <header>
+    <body>
+        <!--home + nav -->
+        <div class="bg-white">
 
-      <div class="relative">
-        <header class="absolute inset-x-0 top-0 z-10 w-full">
-            <div class="px-4 mx-auto sm:px-6 lg:px-8">
-                <div class="flex items-center justify-between h-16 lg:h-20">
-                    <div class="flex-shrink-0">
-                        <a href="#" title="" class="flex">
-                            <img class="w-auto h-16" src="{{ asset('images/icon8.png') }}" alt="" />
-                        </a>
-                        <p>TaskOrbit</p>
-                    </div>
+            <header style="background-color: #1A237E; "id="nav" >
+                <div class="px-4 mx-auto sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between h-16 lg:h-20">
+                        <div class="flex-shrink-0">
+                            <a href="#home" title="" class="flex">
+                                <img class="w-auto h-8" src="{{ asset('images/logofinal.svg') }}" alt="" />
+                                <img class="w-auto h-6" src="{{ asset('images/taskOrbitw.svg') }}" alt="" />
+                            </a>
+                        </div>
 
-                    <button type="button" class="inline-flex p-2 text-black transition-all duration-200 rounded-md lg:hidden focus:bg-gray-100 hover:bg-gray-100">
-                        <!-- Menu open: "hidden", Menu closed: "block" -->
-                        <svg class="block w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                        </svg>
+                        <button type="button" class="inline-flex p-2 text-black transition-all duration-200 rounded-md lg:hidden focus:bg-gray-100 hover:bg-gray-100">
+                            <!-- Menu open: "hidden", Menu closed: "block" -->
+                            <svg class="block w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path>
+                            </svg>
 
-                        <!-- Menu open: "block", Menu closed: "hidden" -->
-                        <svg class="hidden w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
+                            <!-- Menu open: "block", Menu closed: "hidden" -->
+                            <svg class="hidden w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
 
-                    <div class="hidden ml-auto lg:flex lg:items-center lg:justify-center lg:space-x-10">@if (Route::has('login')) @auth
-                        <a href="{{ url('/dashboard') }}" title="" class="text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80"> Dashboard </a>
-                        @else<a href="{{ route('login') }}" title="" class="text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80"> Login </a>
+                        <div class="hidden lg:flex lg:items-center lg:justify-center lg:space-x-10" >
+                            <a href="#home" title="" class="text-base text-white transition-all duration-200 hover:text-opacity-80" id="navbar"> Home </a>
+
+                            <a href="#services" title="" class="text-base text-white transition-all duration-200 hover:text-opacity-80" id="navbar"> Our services </a>
+
+                            <a href="#contact" title="" class="text-base text-white transition-all duration-200 hover:text-opacity-80" id="navbar"> Contact Us</a>
+                        </div>
+
+                        @if (Route::has('login')) @auth
+                        <a href="{{ url('/dashboard') }}" title="" class="hidden lg:inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:text-black focus:text-blackfont-semibold text-white  rounded-full" role="button" id="button"> Join Now </a>
+                        @else
                         @if (Route::has('register'))
-                        <a href="{{ route('register') }}" title="" class="text-base font-semibold text-black transition-all duration-200 hover:text-opacity-80">Register</a>
+                        <a href="{{ route('register') }}" title="" class="hidden lg:inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:text-black focus:text-black  font-semibold text-white rounded-full" role="button" id="button"> Join Now </a>
                         @endif
                         @endauth
-                        <a href="#" title="" class="inline-flex items-center justify-center px-5 py-2.5 text-base font-semibold transition-all duration-200 rounded-full bg-orange-500 text-white hover:bg-orange-600 focus:bg-orange-600" role="button"> Try for free </a>
-                        @endif</div>
-                </div>
-            </div>
-        </header>
-
-        <section class="overflow-hidden" id="bg">
-            <div class="flex flex-col lg:flex-row lg:items-stretch lg:min-h-[800px]">
-                <div class="relative flex items-center justify-center w-full lg:order-2 lg:w-7/12">
-                    <div class="absolute bottom-0 right-0 hidden lg:block">
-                        <img class="object-contain w-auto h-48" src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/3/curved-lines.png" alt="" />
+                        @endif
                     </div>
-
-                    <div class="relative px-4 pt-24 pb-16 text-center sm:px-6 md:px-24 2xl:px-32 lg:py-24 lg:text-left">
-                        <h1 class="text-4xl font-bold text-black sm:text-6xl xl:text-8xl">
-                            TaskOrbit.<br />
-                            <h2>Orbiting around your tasks</h2>
-                        </h1>
-                        <p class="mt-8 text-xl text-black">TaskOrbit is a powerful task management system<br>
-                            designed to streamline project organization and boost productivity . </p>
-
-                        <form action="#" method="POST" class="max-w-xl mx-auto mt-8 bg-white lg:mx-0 sm:bg-transparent lg:mt-12 rounded-xl">
-                            <div class="p-4 sm:p-2 sm:bg-white sm:border-2 sm:border-transparent sm:rounded-full sm:focus-within:border-orange-500 sm:focus-within:ring-1 sm:focus-within:ring-orange-500">
-                                <div class="flex flex-col items-start sm:flex-row">
-                                    <div class="flex-1 w-full min-w-0">
-                                        <div class="relative text-gray-400 focus-within:text-gray-600">
-                                            <label for="email" class="sr-only"></label>
-                                            <input
-                                                type="email"
-                                                name="email"
-                                                id="email"
-                                                placeholder="Enter email to get started"
-                                                class="block w-full px-4 py-4 text-base text-center text-black placeholder-gray-500 transition-all duration-200 border-transparent rounded-full sm:text-left focus:border-transparent focus:ring-0 caret-orange-500"
-                                                required=""
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <button type="submit" class="inline-flex items-center justify-center w-full px-4 py-4 mt-4 font-semibold text-white transition-all duration-200 bg-orange-500 border border-transparent rounded-full sm:w-auto sm:ml-4 sm:mt-0 hover:bg-orange-600 focus:bg-orange-600">
-                                        Try 14 days free
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                        <p class="mt-5 text-base text-black">Instant access . No credit card required</p>
-                    </div>
-
                 </div>
+            </header>
+            <!--home-->
+            <section class="bg-[#FCF8F1] bg-opacity-30 py-10 sm:py-16 lg:py-24" id="home">
+                <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <div class="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
+                        <div>
+                            <p class="text-base font-semibold tracking-wider text-blue-600 uppercase">Orbiting around your TASKS </p>
+                            <h1 class="mt-4 text-4xl font-bold  lg:mt-8 sm:text-6xl xl:text-8xl" style="color: #101663">TaskOrbit</h1>
+                            <p class="mt-4 text-base text-black lg:mt-8 sm:text-xl">TaskOrbit is a powerful task management system<br>
+                                designed to streamline project organization and boost productivity </p>
 
-                <div class="relative w-full overflow-hidden lg:order-1 h-96 lg:h-auto lg:w-5/12">
-                    <div class="absolute inset-0">
+                            <a href="{{ route('register') }}" title="" class="inline-flex items-center px-6 py-4 mt-8 font-semibold text-black transition-all duration-200 rounded-full lg:mt-16 hover:opacity-80" role="button" style="background-color:#ff5f00; ">
+                                Join for free
+                                <svg class="w-6 h-6 ml-8 -mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </a>
+
+                            <p class="mt-5 text-gray-600">Already joined us? <a href="{{ route('login') }}" title="" class="text-black transition-all duration-200 hover:underline">Log in</a></p>
+                        </div>
+
                         <div>
                             <img class="w-full" src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/1/hero-img.png" alt="" />
                         </div>
-
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-
-                    <div class="absolute bottom-0 left-0">
-                        <div class="p-4 sm:p-6 lg:p-8">
-                            <div class="flex items-center">
                     </div>
                 </div>
-            </div>
-        </section>
-    </div>
-    </section>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
+            </section>
+        </div>
+
+        <!--Our services-->
+        <div  style="background-color: #1A237E;">
+
+            <section class="py-10  sm:py-16 lg:py-24" id="services">
+                <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <div class="max-w-2xl mx-auto text-center">
+                        <h2 class="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">Trusted by <span style="color: #ff5f00">30k+</span> world class companies & design teams</h2>
+                    </div>
+
+                    <div class="grid max-w-xl grid-cols-1 mx-auto mt-8 text-center lg:max-w-full sm:mt-12 lg:mt-20 lg:grid-cols-3 gap-x-6 xl:gap-x-12 gap-y-6">
+                        <div class="overflow-hidden bg-white rounded-md shadow">
+                            <div class="px-8 py-12">
+                                <div class="relative w-24 h-24 mx-auto">
+                                    <img class="relative object-cover w-24 h-24 mx-auto " src="{{ asset('images/taskhero2.png') }}" alt="" />
+                                    <div class="absolute top-0 right-0 flex items-center justify-center  rounded-full w-7 h-7">
+                                    </div>
+                                </div>
+                                <p class="text-base font-bold tex-tblack mt-12">Task Management</p>
+                                <blockquote class="mt-7">
+                                    <p class="text-lg text-black">Simplify your workflow with our intuitive task management system. Create, update, and track tasks effortlessly, ensuring that you stay on top of your responsibilities.</p>
+                                </blockquote>
+
+                            </div>
+                        </div>
+
+                        <div class="overflow-hidden bg-white rounded-md shadow">
+                            <div class="px-8 py-12">
+                                <div class="relative w-24 h-24 mx-auto">
+                                    <img class="relative object-cover w-24 h-24 mx-auto " src="{{ asset('images/projecthero.png') }}" alt="" />
+                                    <div class="absolute top-0 right-0 flex items-center justify-center rounded-full w-7 h-7">
+
+                                    </div>
+                                </div>
+                                <p class="text-base font-bold tex-tblack mt-12">Project Progress Tracking</p>
+                                <blockquote class="mt-7">
+                                    <p class="text-lg text-black">Monitor the progress of your projects with real-time updates. Easily visualize the status of tasks and ensure timely completion of your objectives.</p>
+                                </blockquote>
+
+                            </div>
+                        </div>
+
+                        <div class="overflow-hidden bg-white rounded-md shadow">
+                            <div class="px-8 py-12">
+                                <div class="relative w-24 h-24 mx-auto">
+                                    <img class="relative object-cover w-24 h-24 mx-auto " src="{{ asset('images/adminhero.png') }}" alt="" />
+                                    <div class="absolute top-0 right-0 flex items-center justify-center  rounded-full w-7 h-7">
+
+                                    </div>
+                                </div>
+                                <p class="text-base font-bold tex-tblack mt-12">Admin Dashboard</p>
+                                <blockquote class="mt-7">
+                                    <p class="text-lg text-black"> Empower administrators with powerful tools to assign projects, oversee team performance, and conduct detailed analytics, all from a centralized dashboard.</p>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!--contact-->
+        <div style="background-color: rgb(228, 228, 228)">
+            <section class="py-10  sm:py-16 lg:py-24" id="contact">
+                <div class="max-w-6xl px-4 mx-auto sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 md:items-stretch md:grid-cols-2 gap-x-12 lg:gap-x-20 gap-y-10">
+                        <div class="flex flex-col justify-between lg:py-5">
+                            <div>
+                                <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:leading-tight lg:text-5xl">Launch your productivity into orbit with TaskOrbit!</h2>
+                                <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-black">Effortlessly manage tasks, track progress, and collaborate in one streamlined platform with TaskOrbit.</p>
+
+                                <img class="relative z-10 max-w-xs mx-auto -mb-16 md:hidden" src="https://cdn.rareblocks.xyz/collection/celebration/images/contact/4/curve-line-mobile.svg" alt="" />
+
+                                <img class="hidden w-full translate-x-24 translate-y-8 md:block" src="https://cdn.rareblocks.xyz/collection/celebration/images/contact/4/curve-line.svg" alt="" />
+                            </div>
+
+                            <div class="hidden md:mt-auto md:block">
+                                <div class="flex items-center">
+                                    <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                        />
+                                    </svg>
+                                    <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                        />
+                                    </svg>
+                                    <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                        />
+                                    </svg>
+                                    <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                        />
+                                    </svg>
+                                    <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path
+                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                        />
+                                    </svg>
+                                </div>
+
+                                <blockquote class="mt-6">
+                                    <p class="text-lg leading-relaxed text-black">
+                                        "TaskOrbit has revolutionized the way we manage our projects. Tracking tasks, monitoring progress, and collaborating with the team has never been easier. Everything is just a click away, making our workflow more efficient and organized."</p>
+                                </blockquote>
+
+                                <div class="flex items-center mt-8">
+                                    <img class="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://cdn.rareblocks.xyz/collection/celebration/images/contact/4/avatar.jpg" alt="" />
+                                    <div class="ml-4">
+                                        <p class="text-base font-semibold text-black">Jenny Wilson</p>
+                                        <p class="mt-px text-sm text-gray-400">CEO</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lg:pl-12">
+                            <div class="overflow-hidden bg-white rounded-md">
+                                <div class="p-6 sm:p-10">
+                                    <h3 class="text-3xl font-semibold text-black">Connect with Us</h3>
+                                    <p class="mt-4 text-base text-gray-600">Discover how TaskOrbit can streamline your task management. Contact us for more details!</p>
+
+                                    <form action="#" method="POST" class="mt-4">
+                                        <div class="space-y-6">
+                                            <div>
+                                                <label for="" class="text-base font-medium text-gray-900"> Your name </label>
+                                                <div class="mt-2.5 relative">
+                                                    <input
+                                                        type="text"
+                                                        name=""
+                                                        id=""
+                                                        placeholder="Enter your full name"
+                                                        class="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500 caret-orange-500"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <label for="" class="text-base font-medium text-gray-900"> Email address </label>
+                                                <div class="mt-2.5 relative">
+                                                    <input
+                                                        type="text"
+                                                        name=""
+                                                        id=""
+                                                        placeholder="Enter your full name"
+                                                        class="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500 caret-orange-500"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <label for="" class="text-base font-medium text-gray-900"> Project brief </label>
+                                                <div class="mt-2.5 relative">
+                                                    <textarea
+                                                        name=""
+                                                        id=""
+                                                        placeholder="Enter your project brief"
+                                                        class="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md resize-y focus:outline-none focus:ring-orange-500 focus:border-orange-500 caret-orange-500"
+                                                        rows="4"
+                                                    ></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div>
+                                                <button type="submit" class="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200" style="background-color:#101663">
+                                                    Contact Us Now
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="md:hidden">
+                            <div class="flex items-center">
+                                <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                    />
+                                </svg>
+                                <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                    />
+                                </svg>
+                                <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                    />
+                                </svg>
+                                <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                    />
+                                </svg>
+                                <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                                    />
+                                </svg>
+                            </div>
+
+                            <blockquote class="mt-6">
+                                <p class="text-lg leading-relaxed text-white">You made it so simple. My new site is so much faster and easier to work with than my old site. I just choose the page, make the change and click save.</p>
+                            </blockquote>
+
+                            <div class="flex items-center mt-8">
+                                <img class="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://cdn.rareblocks.xyz/collection/celebration/images/contact/4/avatar.jpg" alt="" />
+                                <div class="ml-4">
+                                    <p class="text-base font-semibold text-white">Jenny Wilson</p>
+                                    <p class="mt-px text-sm text-gray-400">Product Designer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+        </div>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
 

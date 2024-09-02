@@ -221,7 +221,7 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
     @foreach ($projects as $project)
     <div class="mx-3 mt-6 flex flex-col self-start rounded-lg bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white max-w-xs">
-        <a href="#!"><img class="rounded-t-lg" src="https://tecdn.b-cdn.net/img/new/standard/city/041.webp" alt="Hollywood Sign on The Hill" /></a>
+        <a href="#!"><img class="rounded-t-lg" src="{{ asset('images/project.png') }}" alt="Hollywood Sign on The Hill" /></a>
         <div class="p-4">
             <h5 class="mb-2 text-lg font-medium leading-tight">{{ $project->name }}</h5>
             <p class="mb-4 text-sm">{{ $project->description }}</p>
