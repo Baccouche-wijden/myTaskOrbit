@@ -245,6 +245,9 @@
                 </button>
             </form>
         </div>
+        <div class="slidecontainer">
+            <input type="range" min="1" max="100" value="{{ $project->rating }}" class="slider" id="myRange-{{ $project->id }}" onchange="submitRating({{ $project->id }}, this.value)">
+        </div>
 
 
         <!-- Edit Form -->
